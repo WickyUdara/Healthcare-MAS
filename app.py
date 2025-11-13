@@ -1,165 +1,131 @@
 import streamlit as st
-from agents import simulation_tick_agent
-from model import HospitalState, Ward, Bed, Patient, WardType, BedStatus, CleaningTeam
-from graph import app
-import uuid
-from typing import Dict, Any
+import database as db
+from agents import build_graph
+import time
 
-# --- Helper Functions ---
-def get_bed_emoji(bed):
-    if bed.status == BedStatus.OCCUPIED:
-        return "👤" # Patient
-    if bed.status == BedStatus.EMPTY:
-        return "🛏️" # Empty
-    if bed.status == BedStatus.DIRTY:
-        return "🧹" # Dirty
-    if bed.status == BedStatus.CLEANING:
-        return "🧼" # Cleaning
-    return "❓"
+# --- Page Config ---
+st.set_page_config(layout="wide", page_title="Hospital Bed Management")
+st.title("🏥 Multi-Agent Hospital Bed Management System")
 
-def initialize_state():
-    """Sets up the initial hospital state in st.session_state."""
-    if 'hospital_state' not in st.session_state:
-        # Create a sample hospital (with objects)
-        wards_config = {
-            WardType.ICU: Ward(
-                ward_id=WardType.ICU, 
-                # Pass a list of DICTIONARIES, not Bed objects
-                beds=[{"bed_id": f"ICU-{i}"} for i in range(5)] 
-            ),
-            WardType.SURGICAL: Ward(
-                ward_id=WardType.SURGICAL, 
-                beds=[{"bed_id": f"SURGICAL-{i}"} for i in range(10)]
-            ),
-            WardType.GENERAL: Ward(
-                ward_id=WardType.GENERAL, 
-                beds=[{"bed_id": f"GENERAL-{i}"} for i in range(20)]
-            ),
-        }
-        
-        # Make a few beds dirty or occupied
-        wards_config[WardType.ICU].beds[0].status = BedStatus.OCCUPIED
-        wards_config[WardType.SURGICAL].beds[0].status = BedStatus.OCCUPIED
-        wards_config[WardType.SURGICAL].beds[1].status = BedStatus.OCCUPIED
-        wards_config[WardType.SURGICAL].beds[2].status = BedStatus.DIRTY
-        
-        # Create the full state as an object first
-        hospital_state_obj = HospitalState(
-            wards=wards_config,
-            waiting_patients=[],
-            cleaning_team=CleaningTeam(cleaners_available=3, cleaners_busy=0),
-            log=["--- Hospital Simulation Initialized ---"],
-            current_patient_request=None,
-        )
-        
-        # *** THIS IS THE FIX ***
-        # Store its DICTIONARY representation, not the object
-        st.session_state.hospital_state = hospital_state_obj.model_dump()
+# --- Initialize ---
+# Build the graph once and store in session state
+if 'graph' not in st.session_state:
+    st.session_state.graph = build_graph()
 
-# --- UI Layout ---
-st.set_page_config(layout="wide")
-st.title("🏥 Intelligent Hospital Bed Management (MAS/LangGraph Sim)")
+# Initialize DB on first run
+if 'db_initialized' not in st.session_state:
+    db.init_db()
+    st.session_state.db_initialized = True
 
-# Initialize
-initialize_state()
-current_state = st.session_state.hospital_state
+# --- Helper to run graph and refresh ---
+def run_graph_action(state, action_message="Processing..."):
+    with st.spinner(action_message):
+        st.session_state.graph.invoke(state)
+    # Use st.rerun() to force a complete reload of the page,
+    # which will query the DB for the new state.
+    st.rerun()
 
-# --- Sidebar Controls ---
-with st.sidebar:
-    st.header("Simulation Controls")
-    
-    st.subheader("Add Patient")
-    patient_name = st.text_input("Patient Name", "John Doe")
-    patient_ward = st.selectbox("Required Ward", [WardType.ICU, WardType.SURGICAL, WardType.GENERAL])
-    
-    if st.button("Add Patient to ED", type="primary"):
-        new_patient = Patient(patient_id=str(uuid.uuid4())[:8], name=patient_name, required_ward=patient_ward)
-        
-        # *** THIS IS THE FIX ***
-        # Store the dictionary version, not the object
-        current_state['waiting_patients'].append(new_patient.model_dump()) 
-        
-        current_state['log'].append(f"NEW ADMISSION: {new_patient.name} added to waiting list for {new_patient.required_ward}.")
-        st.session_state.hospital_state = current_state
-        st.rerun()
-
-    st.subheader("Run Simulation")
-    if st.button("Run Next Admission Step", disabled=not current_state['waiting_patients']):
-        # This is where you call LangGraph!
-        # The input is the current state (a dict)
-        inputs = current_state.copy()
-        
-        # Invoke the graph
-        # The result (new_state_dict) is a DICTIONARY,
-        # but it contains nested Pydantic objects (which is the problem).
-        new_state_dict = app.invoke(inputs)
-        
-        # *** THIS IS THE FIX ***
-        # To ensure we always store a pure, JSON-serializable
-        # dictionary in the session_state (which the UI expects),
-        # we will re-cast the entire result dict into our 
-        # HospitalState Pydantic model, and then immediately
-        # dump it back to a pure dictionary.
-        
-        # 1. Cast the hybrid dict (back) to a Pydantic object
-        new_state_object = HospitalState(**new_state_dict)
-        
-        # 2. Dump the Pydantic object to a pure dict
-        st.session_state.hospital_state = new_state_object.model_dump()
-        st.rerun()
-
-    # In app.py, in the sidebar
-    if st.button("Advance Simulation 1 Tick"):
-        # We're manually calling the agent function, not a graph
-        state_dict = st.session_state.hospital_state
-        state_obj = HospitalState(**state_dict) # Cast to object
-
-        changes = simulation_tick_agent(state_obj) # Run the agent
-
-        # Manually merge the changes
-        for key, value in changes.items():
-            setattr(state_obj, key, value)
-
-        st.session_state.hospital_state = state_obj.model_dump() # Save
-        st.rerun()
-# --- Main Dashboard ---
-col1, col2 = st.columns([2, 1])
+# --- Main Layout ---
+col1, col2 = st.columns([1, 2])
 
 with col1:
-    st.header("Hospital Status")
+    st.header("Control Panel")
     
-    # Display Wards
-    for ward_type, ward_data in current_state['wards'].items():
-        ward = Ward(**ward_data) # Re-cast to Pydantic model for easier handling
-        st.subheader(f"{ward.ward_id.value} Ward")
+    # --- 1. Admit Patient ---
+    with st.form("admit_form", clear_on_submit=True):
+        st.subheader("Admit New Patient")
+        name = st.text_input("Patient Name")
+        severity = st.slider("Severity", 1, 5, 3)
         
-        bed_cols = st.columns(10) # Display 10 beds per row
-        col_idx = 0
-        for bed in ward.beds:
-            with bed_cols[col_idx % 10]:
-                st.container(border=True).markdown(f"**{bed.bed_id}**\n\n{get_bed_emoji(bed)}", unsafe_allow_html=True)
-                col_idx += 1
+        admit_button = st.form_submit_button("Admit Patient", type="primary")
+        
+    if admit_button and name:
+        new_patient_id = db.add_patient(name, severity)
+        run_graph_action({"new_patient_id": new_patient_id}, 
+                         f"Admitting Patient {name}...")
 
-# In app.py
+    # --- 2. Discharge Patient ---
+    st.subheader("Discharge Patient")
+    admitted_patients = db.get_admitted_patients()
+    patient_options = {p['patient_id']: f"{p['name']} (Bed: {p['assigned_bed_id']})" for p in admitted_patients}
+    
+    if not patient_options:
+        st.info("No patients are currently admitted.")
+    else:
+        patient_to_discharge_id = st.selectbox(
+            "Select Patient to Discharge",
+            options=patient_options.keys(),
+            format_func=lambda x: patient_options[x]
+        )
+        discharge_button = st.button("Discharge Patient", type="secondary")
+        
+        if discharge_button:
+            run_graph_action({"patient_to_discharge_id": patient_to_discharge_id},
+                             f"Discharging Patient...")
+
+    # --- 3. Waiting List ---
+    st.subheader("Waiting List")
+    waiting_list = db.get_waiting_list()
+    if not waiting_list:
+        st.text("Waiting list is empty.")
+    else:
+        st.markdown("**Patient (Severity)**")
+        for p in waiting_list:
+            st.text(f"- {p['name']} (Severity: {p['severity']})")
+
 with col2:
-    st.header("Waiting List")
+    st.header("Hospital Dashboard")
+
+    # --- 1. Bed Status Grid ---
+    st.subheader(f"Ward A (5 Beds)")
+    cols_a = st.columns(5)
+    st.subheader(f"Ward B (5 Beds)")
+    cols_b = st.columns(5)
     
-    # --- ADD THIS LINE ---
-    st.metric("Simulation Time (Ticks)", current_state.get('simulation_time', 0))
+    all_beds = db.get_all_bed_statuses()
     
-    team = CleaningTeam(**current_state['cleaning_team'])
-    st.metric("Available Cleaners", team.cleaners_available, f"{team.cleaners_busy} busy")
-    
-    # ... rest of the code ...
+    for i, bed in enumerate(all_beds):
+        col = cols_a[i] if bed['ward'] == 'A' else cols_b[i - 5]
+        
+        with col.container(border=True):
+            st.markdown(f"**Bed {bed['bed_id']}**")
+            if bed['status'] == 'Available':
+                st.success(f"Available", icon="✅")
+            elif bed['status'] == 'Occupied':
+                st.error(f"Occupied", icon="🛏️")
+                st.caption(f"Patient: {bed['name']} (Sev: {bed['severity']})")
+            elif bed['status'] == 'Cleaning':
+                st.warning(f"Cleaning", icon="🧹")
 
+    # --- 2. Agent Communication Log (NEW) ---
+    st.subheader("Agent Communication Log")
 
+    AGENT_ICONS = {
+        "AdmissionAgent": "📥",
+        "DischargeAgent": "📤",
+        "CleaningAgent": "🧹",
+        "WaitingListAgent": "📋",
+        "SuggestionAgent (LLM)": "💡",
+        "System": "⚙️",
+        "AdmissionForm": "📝"
+    }
 
+    logs = db.get_all_logs()
+    log_container = st.container(height=400, border=True)
 
-# Log Area
-st.header("Event Log")
-st.text_area(
-    "Log", 
-    value="\n".join(current_state['log'][::-1]), # Show newest first
-    height=300, 
-    disabled=True
-)
+    for log in logs:
+        agent_name = log['agent_name']
+        message = log['message']
+        timestamp = log['timestamp'].split('T')[1].split('.')[0]
+
+        # Get the icon from our dictionary, with a default
+        icon = AGENT_ICONS.get(agent_name, "🤖")
+
+        # Still show a toast for important suggestions
+        if "**SUGGESTION:**" in message:
+            st.toast(message, icon="💡")
+
+        # Use the chat_message component for the log
+        with log_container.chat_message(name=agent_name, avatar=icon):
+            st.markdown(message)
+            st.caption(f"_{timestamp}_")

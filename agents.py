@@ -1,136 +1,199 @@
-from model import HospitalState, BedStatus, WardType, Patient, CleaningTeam, Ward
-from typing import Dict, Any
+import os
+import time
+import database as db
+from typing import TypedDict, Optional, List
+from langgraph.graph import StateGraph, END
+import google.generativeai as genai
+from dotenv import load_dotenv
 
-# Note the new type hint: state: HospitalState
-def admissions_agent(state: HospitalState) -> Dict[str, Any]:
-    """Picks the next patient from the waiting list to process."""
-    
-    # Use dot notation: state.log
-    state.log.append("--- Admissions Agent finding next patient ---")
-    
-    # Use dot notation: state.waiting_patients
-    if not state.waiting_patients:
-        state.log.append("No patients in waiting list.")
-        # Return only the keys that changed
-        return {"current_patient_request": None, "log": state.log}
+load_dotenv()
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+llm = genai.GenerativeModel('gemini-2.5-flash')
 
-    # Get the next patient (it's already a Patient object)
-    next_patient = state.waiting_patients.pop(0)
-    
-    state.log.append(f"Processing {next_patient.name} (ID: {next_patient.patient_id})")
-    
-    # Return a dictionary of the changes
-    return {
-        "current_patient_request": next_patient,
-        "waiting_patients": state.waiting_patients,
-        "log": state.log
-    }
+# --- Agent State Definition ---
+class HospitalAgentState(TypedDict):
+    new_patient_id: Optional[int]
+    patient_to_discharge_id: Optional[int]
+    bed_to_clean: Optional[str]
+    trigger_suggestion_check: bool
+    agent_messages: List[str] # To hold messages for this run
 
-# Note the new type hint: state: HospitalState
-def ward_agent(state: HospitalState) -> Dict[str, Any]:
-    """Finds a clean bed in the required ward."""
+# --- Agent Nodes ---
+
+def admission_agent(state: HospitalAgentState):
+    patient_id = state['new_patient_id']
+    patient = db.get_patient_details(patient_id)
+    db.log_message('AdmissionAgent', f"Processing new patient: {patient['name']} (Severity: {patient['severity']})")
+
+    # 1. Try to find a bed
+    bed = db.find_available_bed('Any') # Keeping it simple
     
-    # Use dot notation
-    patient = state.current_patient_request
+    if bed:
+        bed_id = bed['bed_id']
+        db.assign_bed_to_patient(patient_id, bed_id)
+        db.log_message('AdmissionAgent', f"Assigned Patient {patient['name']} to Bed {bed_id}.")
+        state['trigger_suggestion_check'] = False
+    else:
+        db.log_message('AdmissionAgent', f"No beds available for Patient {patient['name']}. Patient remains on waiting list.")
+        # Check if this waiting patient is critical
+        if patient['severity'] >= 4: # 4 or 5 is critical
+            state['trigger_suggestion_check'] = True
+        else:
+            state['trigger_suggestion_check'] = False
+            
+    return state
+
+def discharge_agent(state: HospitalAgentState):
+    patient_id = state['patient_to_discharge_id']
+    patient = db.get_patient_details(patient_id)
+    db.log_message('DischargeAgent', f"Processing discharge for Patient {patient['name']}.")
+    
+    bed_id = db.discharge_patient(patient_id)
+    
+    if bed_id:
+        db.log_message('DischargeAgent', f"Patient {patient['name']} discharged from Bed {bed_id}. Bed now cleaning.")
+        state['bed_to_clean'] = bed_id
+    else:
+        db.log_message('DischargeAgent', f"Error: Could not discharge Patient {patient['name']}.")
+        state['bed_to_clean'] = None
+        
+    return state
+
+def cleaning_agent(state: HospitalAgentState):
+    bed_id = state['bed_to_clean']
+    if not bed_id:
+        return state
+        
+    db.log_message('CleaningAgent', f"Starting to clean Bed {bed_id}...")
+    
+    # Simulate a 10-second clean
+    time.sleep(10) 
+    
+    db.set_bed_status(bed_id, 'Available')
+    db.log_message('CleaningAgent', f"Bed {bed_id} is now clean and Available.")
+    
+    return state
+
+def waiting_list_agent(state: HospitalAgentState):
+    db.log_message('WaitingListAgent', "Checking waiting list for available beds...")
+    
+    # Check for the highest priority patient
+    patient = db.get_highest_priority_waiting_patient()
+    
     if not patient:
-        return {} 
+        db.log_message('WaitingListAgent', "Waiting list is empty. No action taken.")
+        return state
 
-    ward_type = patient.required_ward
-    ward = state.wards[ward_type] # Accessing the dict key is still fine
-    state.log.append(f"Ward Agent checking {ward_type} for a bed...")
-
-    # The ward object and bed objects are all Pydantic models now
-    for bed in ward.beds:
-        if bed.status == BedStatus.EMPTY:
-            bed.status = BedStatus.OCCUPIED
-            bed.patient_id = patient.patient_id
-            patient.status = "ADMITTED"
-            
-            state.log.append(f"SUCCESS: Found EMPTY bed {bed.bed_id} for {patient.name}.")
-            # Return only the keys that changed
-            return {"wards": state.wards, "current_patient_request": patient, "log": state.log, "bed_found_status": "FOUND_CLEAN"}
-
-    state.log.append(f"No EMPTY beds in {ward_type}.")
-    return {"log": state.log, "bed_found_status": "NO_CLEAN_BED"}
-
-
-# Note the new type hint: state: HospitalState
-# In agents.py
-def cleaning_service_agent(state: HospitalState) -> Dict[str, Any]:
-    """Finds a dirty bed and DISPATCHES a cleaner. Does NOT assign the bed."""
-    patient = state.current_patient_request
-    ward_type = patient.required_ward
-    ward = state.wards[ward_type]
-    team = state.cleaning_team
+    # Check for an available bed
+    bed = db.find_available_bed('Any')
     
-    state.log.append(f"Cleaning Agent checking {ward_type} for DIRTY beds...")
+    if bed and patient:
+        patient_id = patient['patient_id']
+        bed_id = bed['bed_id']
+        db.assign_bed_to_patient(patient_id, bed_id)
+        db.log_message('WaitingListAgent', f"Assigned high-priority Patient {patient['name']} (Severity: {patient['severity']}) from waiting list to Bed {bed_id}.")
+    else:
+        db.log_message('WaitingListAgent', "No available beds for waiting list patients.")
+        
+    return state
 
-    if team.cleaners_available <= 0:
-        state.log.append("No available cleaners. Patient must wait.")
-        return {"log": state.log, "bed_found_status": "NO_CLEANER"}
-
-    for bed in ward.beds:
-        if bed.status == BedStatus.DIRTY:
-            team.cleaners_available -= 1
-            team.cleaners_busy += 1
-            bed.status = BedStatus.CLEANING
-            
-            # --- THIS IS THE KEY CHANGE ---
-            # Set a timer instead of instantly cleaning
-            bed.time_to_clean = 3 # It will take 3 "ticks"
-            
-            state.log.append(f"Found DIRTY bed {bed.bed_id}. Dispatching cleaner. Will be ready in 3 ticks.")
-            
-            # This agent now FAILS to find a bed for the patient
-            # The patient MUST wait until the simulation ticks
-            return {
-                "wards": state.wards,
-                "cleaning_team": team,
-                "log": state.log,
-                "bed_found_status": "CLEANING_STARTED" # New status
-            }
-
-    state.log.append(f"No DIRTY beds available to clean in {ward_type}.")
-    return {"log": state.log, "bed_found_status": "NO_DIRTY_BEDS"}
-
-
-# Note the new type hint: state: HospitalState
-def waitlist_agent(state: HospitalState) -> Dict[str, Any]:
-    """If no bed can be found or cleaned, put patient back on list."""
-    patient = state.current_patient_request
-    state.log.append(f"FAILURE: No beds for {patient.name}. Returning to waiting list.")
+def suggestion_agent(state: HospitalAgentState):
+    db.log_message('SuggestionAgent', "Critical patient is waiting. Analyzing admitted patients for discharge potential...")
     
-    # Use dot notation
-    state.waiting_patients.insert(0, patient)
+    low_sev_patients = db.get_low_severity_admitted_patients()
     
-    return {"waiting_patients": state.waiting_patients, "log": state.log}
+    if not low_sev_patients:
+        db.log_message('SuggestionAgent', "No low-severity patients found to suggest for discharge.")
+        return state
+        
+    # Format for LLM
+    patient_list_str = "\n".join([f"- Bed {p['assigned_bed_id']}: Patient {p['name']} (Severity: {p['severity']})" for p in low_sev_patients])
+    
+    prompt = f"""
+    You are a hospital management assistant. A new, critical-severity patient is on the waiting list, but all beds are full.
+    Review this list of currently admitted, low-severity patients and provide a brief, one-sentence suggestion for the hospital manager.
+    Do not suggest discharging anyone, only suggest they be "reviewed".
 
-# In agents.py
-def simulation_tick_agent(state: HospitalState) -> Dict[str, Any]:
-    """Advances the simulation by one time-step AND updates all timed processes."""
-    state.simulation_time += 1
-    state.log.append(f"--- Simulation Tick {state.simulation_time} ---")
+    Low-Severity Patients:
+    {patient_list_str}
+
+    Provide one suggestion.
+    """
     
-    team = state.cleaning_team
+    try:
+        response = llm.generate_content(prompt)
+        suggestion = response.text.strip()
+        db.log_message('SuggestionAgent (LLM)', f"SUGGESTION: {suggestion}")
+    except Exception as e:
+        db.log_message('SuggestionAgent (LLM)', f"Error contacting LLM: {e}")
+        
+    return state
+
+# --- Graph Definition ---
+
+def build_graph():
+    workflow = StateGraph(HospitalAgentState)
+
+    # Add Nodes
+    workflow.add_node("admission_agent", admission_agent)
+    workflow.add_node("discharge_agent", discharge_agent)
+    workflow.add_node("cleaning_agent", cleaning_agent)
+    workflow.add_node("waiting_list_agent", waiting_list_agent)
+    workflow.add_node("suggestion_agent", suggestion_agent)
+
+    # --- Define Edges ---
     
-    # --- THIS IS THE NEW LOGIC ---
-    # Iterate over all wards and all beds to update their status
-    for ward in state.wards.values():
-        for bed in ward.beds:
-            if bed.status == BedStatus.CLEANING:
-                bed.time_to_clean -= 1
-                state.log.append(f"Cleaning Bed {bed.bed_id}... {bed.time_to_clean} ticks remaining.")
-                
-                if bed.time_to_clean <= 0:
-                    bed.status = BedStatus.EMPTY
-                    team.cleaners_available += 1
-                    team.cleaners_busy -= 1
-                    state.log.append(f"SUCCESS: Bed {bed.bed_id} is now CLEAN and available.")
-                    
-    # Return all the state slices that have been modified
-    return {
-        "wards": state.wards, 
-        "cleaning_team": team, 
-        "log": state.log, 
-        "simulation_time": state.simulation_time
-    }
+    # 1. Router: Decide if we are admitting or discharging
+    def router(state: HospitalAgentState):
+        if state.get('new_patient_id'):
+            return 'admission_agent'
+        if state.get('patient_to_discharge_id'):
+            return 'discharge_agent'
+        return END # Should not happen
+
+    workflow.set_conditional_entry_point(router)
+
+    # 2. Admission Path
+    def after_admission(state: HospitalAgentState):
+        if state.get('trigger_suggestion_check', False):
+            return 'suggestion_agent'
+        return END
+
+    workflow.add_conditional_edges("admission_agent", after_admission, {
+        "suggestion_agent": "suggestion_agent",
+        END: END
+    })
+    workflow.add_edge("suggestion_agent", END)
+
+    # 3. Discharge Path
+    workflow.add_edge("discharge_agent", "cleaning_agent")
+    workflow.add_edge("cleaning_agent", "waiting_list_agent")
+    workflow.add_edge("waiting_list_agent", END)
+
+    # Compile the graph
+    app = workflow.compile()
+    return app
+
+if __name__ == "__main__":
+    # Test the graph
+    db.init_db()
+    graph = build_graph()
+    
+    # Test 1: Add a patient
+    new_patient_id = db.add_patient("Test Patient 1", 3)
+    state = {"new_patient_id": new_patient_id}
+    graph.invoke(state)
+    
+    # Test 2: Add another patient
+    new_patient_id_2 = db.add_patient("Test Patient 2 (Critical)", 5)
+    state = {"new_patient_id": new_patient_id_2}
+    graph.invoke(state)
+
+    # Test 3: Discharge first patient
+    state = {"patient_to_discharge_id": 1}
+    graph.invoke(state)
+    
+    print("\n--- Final Bed Status ---")
+    print(db.get_all_bed_statuses())
+    print("\n--- Agent Logs ---")
+    print(db.get_all_logs())
