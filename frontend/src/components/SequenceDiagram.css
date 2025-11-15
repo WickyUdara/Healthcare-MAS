@@ -1,0 +1,33 @@
+.sequence-diagram-container {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+  margin: 16px 0;
+  overflow-x: auto;
+}
+
+.diagram-title {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 16px;
+  color: #333;
+}
+
+.diagram-content {
+  min-height: 200px;
+}
+
+.diagram-content svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.diagram-content pre {
+  background: #f5f5f5;
+  padding: 12px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 12px;
+  line-height: 1.4;
+}

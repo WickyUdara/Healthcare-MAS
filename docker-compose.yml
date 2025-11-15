@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_PATH=/app/data/hospital.db
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - LANGGRAPH_FALLBACK=true
+    volumes:
+      - hospital_data:/app/data
+    command: python main.py
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - hospital-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - hospital-network
+
+volumes:
+  hospital_data:
+
+networks:
+  hospital-network:
+    driver: bridge

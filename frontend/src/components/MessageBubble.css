@@ -1,0 +1,44 @@
+.message-bubble {
+  background: #f9f9f9;
+  border-left: 4px solid #2196F3;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.message-arrow {
+  color: #999;
+}
+
+.message-performative {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.message-reason {
+  font-size: 13px;
+  margin: 8px 0;
+  color: #333;
+  line-height: 1.4;
+}
+
+.message-timestamp {
+  font-size: 11px;
+  color: #999;
+  margin-top: 8px;
+}

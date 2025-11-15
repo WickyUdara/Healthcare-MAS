@@ -1,0 +1,51 @@
+.patient-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.patient-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.patient-card-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.patient-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.patient-card-body {
+  font-size: 13px;
+}
+
+.patient-card-body p {
+  margin: 4px 0;
+}
+
+.severity-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.emergency-badge {
+  color: #F44336;
+  font-weight: bold;
+}

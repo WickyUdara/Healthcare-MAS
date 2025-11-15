@@ -1,0 +1,1719 @@
+[
+  {
+    "id": "e45e2545-7c3e-491f-b52e-87f1385c0628",
+    "transaction_id": "a66c32f2-c4b9-42b1-9c31-0d2dd80ae669",
+    "timestamp": "2025-11-15T17:25:09.906473",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 4,
+      "patient_name": "John Smith",
+      "severity": 50,
+      "preferred_ward": "ICU",
+      "is_emergency": false
+    },
+    "reason": "Admit John Smith with severity 50/100"
+  },
+  {
+    "id": "f6342ff9-7b67-4385-968f-b53cb1a690e7",
+    "transaction_id": "a66c32f2-c4b9-42b1-9c31-0d2dd80ae669",
+    "timestamp": "2025-11-15T17:25:09.908297",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 4,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "c47d8b16-abab-4203-a9a3-6030749c7c77",
+    "transaction_id": "a66c32f2-c4b9-42b1-9c31-0d2dd80ae669",
+    "timestamp": "2025-11-15T17:25:09.920039",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 4
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "cba5d43a-79b9-4b7f-88a9-cbc1fe203f44",
+    "transaction_id": "a66c32f2-c4b9-42b1-9c31-0d2dd80ae669",
+    "timestamp": "2025-11-15T17:25:09.930691",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 4,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "8abf12a9-1808-4aac-9382-e579a5b9b129",
+    "transaction_id": "a66c32f2-c4b9-42b1-9c31-0d2dd80ae669",
+    "timestamp": "2025-11-15T17:25:09.944491",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 4
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "7c8c2672-391f-40da-a4b5-c3b029965016",
+    "transaction_id": "a66c32f2-c4b9-42b1-9c31-0d2dd80ae669",
+    "timestamp": "2025-11-15T17:25:09.956040",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 4,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "cc62d871-5650-493d-b45d-0752065e8f32",
+    "transaction_id": "a66c32f2-c4b9-42b1-9c31-0d2dd80ae669",
+    "timestamp": "2025-11-15T17:25:09.968868",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 4,
+      "patient_name": "John Smith",
+      "severity": 50
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "f7e3ee83-9d35-42f8-8435-70dfddcb0a6b",
+    "transaction_id": "3ecdd2b2-8487-4f42-b806-ff861addf389",
+    "timestamp": "2025-11-15T18:12:55.547790",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 8,
+      "patient_name": "John Smith",
+      "severity": 50,
+      "preferred_ward": "ICU",
+      "is_emergency": false
+    },
+    "reason": "Admit John Smith with severity 50/100"
+  },
+  {
+    "id": "d6689037-5656-407b-99be-1b61c5c51633",
+    "transaction_id": "3ecdd2b2-8487-4f42-b806-ff861addf389",
+    "timestamp": "2025-11-15T18:12:55.578320",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 8,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "b2374169-5d9c-4bae-82f2-0cc13975c2f4",
+    "transaction_id": "3ecdd2b2-8487-4f42-b806-ff861addf389",
+    "timestamp": "2025-11-15T18:12:55.599358",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 8
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "b9ac3e44-d756-4289-b9a6-8a65c1b0061c",
+    "transaction_id": "3ecdd2b2-8487-4f42-b806-ff861addf389",
+    "timestamp": "2025-11-15T18:12:55.627577",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 8,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "337e4c3f-f018-46d2-a40b-6d2a9e54c25b",
+    "transaction_id": "3ecdd2b2-8487-4f42-b806-ff861addf389",
+    "timestamp": "2025-11-15T18:12:55.667067",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 8
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "b9b9ec74-2991-41a6-ac30-55276ec578a5",
+    "transaction_id": "3ecdd2b2-8487-4f42-b806-ff861addf389",
+    "timestamp": "2025-11-15T18:12:55.710709",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 8,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "fa0f7830-53e6-4488-88fd-9b54d0ef93a2",
+    "transaction_id": "3ecdd2b2-8487-4f42-b806-ff861addf389",
+    "timestamp": "2025-11-15T18:12:55.745501",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 8,
+      "patient_name": "John Smith",
+      "severity": 50
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "ecd1a90e-5ae3-4a69-8be5-8cbe6a287f2f",
+    "transaction_id": "5171e9cc-4b83-4a82-bef4-661b7421b95f",
+    "timestamp": "2025-11-15T18:14:24.086218",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 9,
+      "patient_name": "indumini",
+      "severity": 50,
+      "preferred_ward": "ICU",
+      "is_emergency": false
+    },
+    "reason": "Admit indumini with severity 50/100"
+  },
+  {
+    "id": "3d0125bf-4471-4646-809c-b144375c2ab3",
+    "transaction_id": "5171e9cc-4b83-4a82-bef4-661b7421b95f",
+    "timestamp": "2025-11-15T18:14:24.126205",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 9,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "08bc7521-bf0c-4241-b0ca-79676a7e8ca5",
+    "transaction_id": "5171e9cc-4b83-4a82-bef4-661b7421b95f",
+    "timestamp": "2025-11-15T18:14:24.159900",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 9
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "610ce3e1-77c8-485c-9656-e2609e5adbb2",
+    "transaction_id": "5171e9cc-4b83-4a82-bef4-661b7421b95f",
+    "timestamp": "2025-11-15T18:14:24.221393",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 9,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "6d495d75-5972-4ae3-a594-d5e42f542aec",
+    "transaction_id": "5171e9cc-4b83-4a82-bef4-661b7421b95f",
+    "timestamp": "2025-11-15T18:14:24.283545",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 9
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "371a05d4-158a-48a4-be7f-cb8ad44886b4",
+    "transaction_id": "5171e9cc-4b83-4a82-bef4-661b7421b95f",
+    "timestamp": "2025-11-15T18:14:24.353708",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 9,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "a3ff4753-933f-4fc5-ac28-e3ef568fbbda",
+    "transaction_id": "5171e9cc-4b83-4a82-bef4-661b7421b95f",
+    "timestamp": "2025-11-15T18:14:24.405635",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 9,
+      "patient_name": "indumini",
+      "severity": 50
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "c96fd4ad-498b-4567-b859-9365518bc468",
+    "transaction_id": "6006194f-c769-451b-8abf-fe64fa8a5d4e",
+    "timestamp": "2025-11-15T18:19:22.475900",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 10,
+      "patient_name": "Alice Johnson",
+      "severity": 55,
+      "preferred_ward": "GENERAL",
+      "is_emergency": true
+    },
+    "reason": "Admit Alice Johnson with severity 55/100"
+  },
+  {
+    "id": "9228b7f1-44b4-4671-8553-cec2dc45d3aa",
+    "transaction_id": "6006194f-c769-451b-8abf-fe64fa8a5d4e",
+    "timestamp": "2025-11-15T18:19:22.487877",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 10,
+      "preferred_ward": "GENERAL",
+      "severity": 55
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "873ce84f-0138-4a08-adad-65d139954cde",
+    "transaction_id": "6006194f-c769-451b-8abf-fe64fa8a5d4e",
+    "timestamp": "2025-11-15T18:19:22.501277",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 10
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "afd308d8-e125-4b72-813c-2cc13b35b784",
+    "transaction_id": "6006194f-c769-451b-8abf-fe64fa8a5d4e",
+    "timestamp": "2025-11-15T18:19:22.513111",
+    "sender": "CoordinatorAgent",
+    "receiver": "CriticalPatientAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "evaluate_preemption",
+      "patient_id": 10,
+      "severity": 55
+    },
+    "reason": "Request preemption evaluation for emergency patient"
+  },
+  {
+    "id": "3393c5b8-13e9-4c8c-8c3b-697791734547",
+    "transaction_id": "6006194f-c769-451b-8abf-fe64fa8a5d4e",
+    "timestamp": "2025-11-15T18:19:22.524285",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 10,
+      "preferred_ward": "GENERAL",
+      "severity": 55
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "7d02ea89-5b2a-4785-8aa3-8a50c02ed6ab",
+    "transaction_id": "6006194f-c769-451b-8abf-fe64fa8a5d4e",
+    "timestamp": "2025-11-15T18:19:22.536621",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 10
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "a7f0e7b0-053c-4347-8a43-e8fe07ff9022",
+    "transaction_id": "6006194f-c769-451b-8abf-fe64fa8a5d4e",
+    "timestamp": "2025-11-15T18:19:22.550101",
+    "sender": "CoordinatorAgent",
+    "receiver": "CriticalPatientAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "evaluate_preemption",
+      "patient_id": 10,
+      "severity": 55
+    },
+    "reason": "Request preemption evaluation for emergency patient"
+  },
+  {
+    "id": "0f0e64f6-120b-4f77-b826-759ef1a8339b",
+    "transaction_id": "6006194f-c769-451b-8abf-fe64fa8a5d4e",
+    "timestamp": "2025-11-15T18:19:22.562385",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 10,
+      "preferred_ward": "GENERAL",
+      "severity": 55
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "b5c6e231-6e29-455e-9c87-5930bd936386",
+    "transaction_id": "6006194f-c769-451b-8abf-fe64fa8a5d4e",
+    "timestamp": "2025-11-15T18:19:22.587642",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 10,
+      "patient_name": "Alice Johnson",
+      "severity": 55
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "ea139be2-0ced-4bdd-abad-1f7a6d9d9b29",
+    "transaction_id": "52663b12-290e-4197-adc6-38cd8983b5ea",
+    "timestamp": "2025-11-15T18:21:32.588770",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 11,
+      "patient_name": "Alice Johnson",
+      "severity": 55,
+      "preferred_ward": "GENERAL",
+      "is_emergency": true
+    },
+    "reason": "Admit Alice Johnson with severity 55/100"
+  },
+  {
+    "id": "13948ee9-eade-4d57-b426-c9c3b7c57e2f",
+    "transaction_id": "52663b12-290e-4197-adc6-38cd8983b5ea",
+    "timestamp": "2025-11-15T18:21:32.606119",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 11,
+      "preferred_ward": "GENERAL",
+      "severity": 55
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "932a868f-902f-4c5f-9d14-b3b7ed31fec0",
+    "transaction_id": "52663b12-290e-4197-adc6-38cd8983b5ea",
+    "timestamp": "2025-11-15T18:21:32.624692",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 11
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "6766dcff-3f3d-4262-b82b-025058f76560",
+    "transaction_id": "52663b12-290e-4197-adc6-38cd8983b5ea",
+    "timestamp": "2025-11-15T18:21:32.639067",
+    "sender": "CoordinatorAgent",
+    "receiver": "CriticalPatientAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "evaluate_preemption",
+      "patient_id": 11,
+      "severity": 55
+    },
+    "reason": "Request preemption evaluation for emergency patient"
+  },
+  {
+    "id": "5c165c37-ea56-4213-828c-e841c8b0082f",
+    "transaction_id": "52663b12-290e-4197-adc6-38cd8983b5ea",
+    "timestamp": "2025-11-15T18:21:32.686651",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 11,
+      "preferred_ward": "GENERAL",
+      "severity": 55
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "5069363f-156f-43a6-9a47-21ed531e8295",
+    "transaction_id": "52663b12-290e-4197-adc6-38cd8983b5ea",
+    "timestamp": "2025-11-15T18:21:32.755079",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 11
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "e8290d32-34df-4da7-a3f3-ef9946bf4297",
+    "transaction_id": "52663b12-290e-4197-adc6-38cd8983b5ea",
+    "timestamp": "2025-11-15T18:21:32.824642",
+    "sender": "CoordinatorAgent",
+    "receiver": "CriticalPatientAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "evaluate_preemption",
+      "patient_id": 11,
+      "severity": 55
+    },
+    "reason": "Request preemption evaluation for emergency patient"
+  },
+  {
+    "id": "e64ec708-37ad-425e-940d-afe6d39b0217",
+    "transaction_id": "52663b12-290e-4197-adc6-38cd8983b5ea",
+    "timestamp": "2025-11-15T18:21:32.894564",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 11,
+      "preferred_ward": "GENERAL",
+      "severity": 55
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "64dffd23-e6d8-4127-934b-65555cd09254",
+    "transaction_id": "52663b12-290e-4197-adc6-38cd8983b5ea",
+    "timestamp": "2025-11-15T18:21:32.971392",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 11,
+      "patient_name": "Alice Johnson",
+      "severity": 55
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "4c85b469-efcf-4164-b268-5b9e78eb5f88",
+    "transaction_id": "84395594-4544-4a8c-bc04-694a2740cadc",
+    "timestamp": "2025-11-15T18:23:36.427702",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 12,
+      "patient_name": "John Smith",
+      "severity": 50,
+      "preferred_ward": "ICU",
+      "is_emergency": false
+    },
+    "reason": "Admit John Smith with severity 50/100"
+  },
+  {
+    "id": "c39dabf1-605f-4e98-9246-f7cde69a6c73",
+    "transaction_id": "84395594-4544-4a8c-bc04-694a2740cadc",
+    "timestamp": "2025-11-15T18:23:36.460832",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 12,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "3734e78c-4b0a-4c0e-b622-272ebbdf0c88",
+    "transaction_id": "84395594-4544-4a8c-bc04-694a2740cadc",
+    "timestamp": "2025-11-15T18:23:36.485396",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 12
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "844e8f53-0235-4d11-8e7f-a41dd44d4e9c",
+    "transaction_id": "84395594-4544-4a8c-bc04-694a2740cadc",
+    "timestamp": "2025-11-15T18:23:36.533030",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 12,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "39e419f9-cda0-48cf-91da-3449ad002099",
+    "transaction_id": "84395594-4544-4a8c-bc04-694a2740cadc",
+    "timestamp": "2025-11-15T18:23:36.591427",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 12
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "c4d06532-e12d-464a-91dd-0b77ce121db7",
+    "transaction_id": "84395594-4544-4a8c-bc04-694a2740cadc",
+    "timestamp": "2025-11-15T18:23:36.660437",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 12,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "84be87cb-33b7-4b3b-9def-067cc11741ef",
+    "transaction_id": "84395594-4544-4a8c-bc04-694a2740cadc",
+    "timestamp": "2025-11-15T18:23:36.736972",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 12,
+      "patient_name": "John Smith",
+      "severity": 50
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "94a56604-5d9d-495a-bfbc-0d9633c0df85",
+    "transaction_id": "e5a9b26b-1bc3-45c0-9388-ef3d86f1aed4",
+    "timestamp": "2025-11-15T18:36:18.892735",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 13,
+      "patient_name": "Emergency Patient",
+      "severity": 90,
+      "preferred_ward": "ICU",
+      "is_emergency": true
+    },
+    "reason": "Admit Emergency Patient with severity 90/100"
+  },
+  {
+    "id": "2e310091-f985-48c5-a517-3e1d3d4114c5",
+    "transaction_id": "e5a9b26b-1bc3-45c0-9388-ef3d86f1aed4",
+    "timestamp": "2025-11-15T18:36:18.913673",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 13,
+      "preferred_ward": "ICU",
+      "severity": 90
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "3c235c35-7f13-4d20-ac3a-66e6af59fe75",
+    "transaction_id": "e5a9b26b-1bc3-45c0-9388-ef3d86f1aed4",
+    "timestamp": "2025-11-15T18:36:18.935906",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 13
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "be191f25-72b0-4792-9420-e66ad5bed382",
+    "transaction_id": "e5a9b26b-1bc3-45c0-9388-ef3d86f1aed4",
+    "timestamp": "2025-11-15T18:36:18.956276",
+    "sender": "CoordinatorAgent",
+    "receiver": "CriticalPatientAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "evaluate_preemption",
+      "patient_id": 13,
+      "severity": 90
+    },
+    "reason": "Request preemption evaluation for emergency patient"
+  },
+  {
+    "id": "55d1d98a-926f-44f8-9059-415b670376f6",
+    "transaction_id": "e5a9b26b-1bc3-45c0-9388-ef3d86f1aed4",
+    "timestamp": "2025-11-15T18:36:18.975273",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 13,
+      "preferred_ward": "ICU",
+      "severity": 90
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "b44df1a6-b2ba-497e-b4d9-f77bd3ccd2d3",
+    "transaction_id": "e5a9b26b-1bc3-45c0-9388-ef3d86f1aed4",
+    "timestamp": "2025-11-15T18:36:19.004465",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 13
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "cfe7d771-cbca-4f56-92ff-73525d9cc6a8",
+    "transaction_id": "e5a9b26b-1bc3-45c0-9388-ef3d86f1aed4",
+    "timestamp": "2025-11-15T18:36:19.058129",
+    "sender": "CoordinatorAgent",
+    "receiver": "CriticalPatientAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "evaluate_preemption",
+      "patient_id": 13,
+      "severity": 90
+    },
+    "reason": "Request preemption evaluation for emergency patient"
+  },
+  {
+    "id": "ea016eed-78d8-45c3-8378-a9a924e04457",
+    "transaction_id": "e5a9b26b-1bc3-45c0-9388-ef3d86f1aed4",
+    "timestamp": "2025-11-15T18:36:19.128307",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 13,
+      "preferred_ward": "ICU",
+      "severity": 90
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "e01d2d66-4a19-4c0e-baaa-bfa87fbed5c3",
+    "transaction_id": "e5a9b26b-1bc3-45c0-9388-ef3d86f1aed4",
+    "timestamp": "2025-11-15T18:36:19.184257",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 13,
+      "patient_name": "Emergency Patient",
+      "severity": 90
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "ab8c75b6-4c2c-4cfe-9722-70eaa5bbf6e7",
+    "transaction_id": "1ecd544d-9b2a-42e0-ad43-9beaaa6cc33e",
+    "timestamp": "2025-11-15T18:36:48.494898",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 14,
+      "patient_name": "Patient 13",
+      "severity": 25,
+      "preferred_ward": "ICU",
+      "is_emergency": true
+    },
+    "reason": "Admit Patient 13 with severity 25/100"
+  },
+  {
+    "id": "206ff9ee-b339-48a6-9bd3-e9eaa55ce602",
+    "transaction_id": "1ecd544d-9b2a-42e0-ad43-9beaaa6cc33e",
+    "timestamp": "2025-11-15T18:36:48.538919",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 14,
+      "preferred_ward": "ICU",
+      "severity": 25
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "0ff51854-4fc9-4b2a-96da-96326c3742ba",
+    "transaction_id": "1ecd544d-9b2a-42e0-ad43-9beaaa6cc33e",
+    "timestamp": "2025-11-15T18:36:48.608411",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 14
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "e9968039-eceb-4e83-9c75-25d102812529",
+    "transaction_id": "1ecd544d-9b2a-42e0-ad43-9beaaa6cc33e",
+    "timestamp": "2025-11-15T18:36:48.673399",
+    "sender": "CoordinatorAgent",
+    "receiver": "CriticalPatientAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "evaluate_preemption",
+      "patient_id": 14,
+      "severity": 25
+    },
+    "reason": "Request preemption evaluation for emergency patient"
+  },
+  {
+    "id": "c3f323bd-c0fa-4b6e-ba9f-9b91b06acb53",
+    "transaction_id": "1ecd544d-9b2a-42e0-ad43-9beaaa6cc33e",
+    "timestamp": "2025-11-15T18:36:48.759524",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 14,
+      "preferred_ward": "ICU",
+      "severity": 25
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "e3bb1b43-8f0c-449a-af82-acdd401f80d0",
+    "transaction_id": "1ecd544d-9b2a-42e0-ad43-9beaaa6cc33e",
+    "timestamp": "2025-11-15T18:36:48.817846",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 14
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "cd22a760-4c95-4e80-974a-4f412fda41e7",
+    "transaction_id": "1ecd544d-9b2a-42e0-ad43-9beaaa6cc33e",
+    "timestamp": "2025-11-15T18:36:48.870498",
+    "sender": "CoordinatorAgent",
+    "receiver": "CriticalPatientAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "evaluate_preemption",
+      "patient_id": 14,
+      "severity": 25
+    },
+    "reason": "Request preemption evaluation for emergency patient"
+  },
+  {
+    "id": "5f01adfd-5535-4680-b557-3665a3402c57",
+    "transaction_id": "1ecd544d-9b2a-42e0-ad43-9beaaa6cc33e",
+    "timestamp": "2025-11-15T18:36:48.958714",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 14,
+      "preferred_ward": "ICU",
+      "severity": 25
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "776b5358-9eae-44dd-b03c-db8e766e9d56",
+    "transaction_id": "1ecd544d-9b2a-42e0-ad43-9beaaa6cc33e",
+    "timestamp": "2025-11-15T18:36:49.040940",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 14,
+      "patient_name": "Patient 13",
+      "severity": 25
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "6b939df2-9700-4ee7-88ea-c29d78541579",
+    "transaction_id": "f7594c63-4006-4ad5-8d00-af7f9e5e97f6",
+    "timestamp": "2025-11-15T18:36:51.904666",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 15,
+      "patient_name": "Patient 14",
+      "severity": 25,
+      "preferred_ward": "GENERAL",
+      "is_emergency": false
+    },
+    "reason": "Admit Patient 14 with severity 25/100"
+  },
+  {
+    "id": "7361f797-5176-4d12-b782-3fba6f2605ab",
+    "transaction_id": "f7594c63-4006-4ad5-8d00-af7f9e5e97f6",
+    "timestamp": "2025-11-15T18:36:51.998170",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 15,
+      "preferred_ward": "GENERAL",
+      "severity": 25
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "cf130e87-5e99-4852-957a-3bd2db50206d",
+    "transaction_id": "f7594c63-4006-4ad5-8d00-af7f9e5e97f6",
+    "timestamp": "2025-11-15T18:36:52.053811",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 15
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "09bca556-35e5-4c25-891d-c7e62fdaadf9",
+    "transaction_id": "f7594c63-4006-4ad5-8d00-af7f9e5e97f6",
+    "timestamp": "2025-11-15T18:36:52.131619",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 15,
+      "preferred_ward": "GENERAL",
+      "severity": 25
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "9afafe0c-bdd4-4d44-b191-7ccadd660cf3",
+    "transaction_id": "f7594c63-4006-4ad5-8d00-af7f9e5e97f6",
+    "timestamp": "2025-11-15T18:36:52.200254",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 15
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "0be77356-a8a5-4b42-b68f-aee0acb885de",
+    "transaction_id": "f7594c63-4006-4ad5-8d00-af7f9e5e97f6",
+    "timestamp": "2025-11-15T18:36:52.254949",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 15,
+      "preferred_ward": "GENERAL",
+      "severity": 25
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "14bc0083-c256-42e9-883d-d1316fd463ad",
+    "transaction_id": "f7594c63-4006-4ad5-8d00-af7f9e5e97f6",
+    "timestamp": "2025-11-15T18:36:52.341339",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 15,
+      "patient_name": "Patient 14",
+      "severity": 25
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "d95799f6-ff34-46fc-9e6d-3da06e7f6d50",
+    "transaction_id": "0840b785-9233-4c58-a111-eff9e001fd11",
+    "timestamp": "2025-11-15T18:36:55.098126",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 16,
+      "patient_name": "Patient 15",
+      "severity": 20,
+      "preferred_ward": "SURGERY",
+      "is_emergency": false
+    },
+    "reason": "Admit Patient 15 with severity 20/100"
+  },
+  {
+    "id": "4a2992dc-97bc-4b97-8470-1373dd266cdc",
+    "transaction_id": "0840b785-9233-4c58-a111-eff9e001fd11",
+    "timestamp": "2025-11-15T18:36:55.113192",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 16,
+      "preferred_ward": "SURGERY",
+      "severity": 20
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "d7c46996-b3fb-484e-b067-54c13eef2270",
+    "transaction_id": "0840b785-9233-4c58-a111-eff9e001fd11",
+    "timestamp": "2025-11-15T18:36:55.149353",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 16
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "9ed4a56d-a260-40fe-87c1-9694a7bd1015",
+    "transaction_id": "0840b785-9233-4c58-a111-eff9e001fd11",
+    "timestamp": "2025-11-15T18:36:55.238456",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 16,
+      "preferred_ward": "SURGERY",
+      "severity": 20
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "de86ee86-3c09-450d-ba44-5eb5828f9063",
+    "transaction_id": "0840b785-9233-4c58-a111-eff9e001fd11",
+    "timestamp": "2025-11-15T18:36:55.284962",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 16
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "c273174a-6dc1-448c-9cf5-c601970df8e0",
+    "transaction_id": "0840b785-9233-4c58-a111-eff9e001fd11",
+    "timestamp": "2025-11-15T18:36:55.331343",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 16,
+      "preferred_ward": "SURGERY",
+      "severity": 20
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "b3802f27-52c0-4db5-b8c3-80b7d1d2c938",
+    "transaction_id": "0840b785-9233-4c58-a111-eff9e001fd11",
+    "timestamp": "2025-11-15T18:36:55.373168",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 16,
+      "patient_name": "Patient 15",
+      "severity": 20
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "4ffac18e-ff83-4bb7-b804-fae3ce018ed2",
+    "transaction_id": "2c0b7750-a0f5-47ab-b73d-cf9951752bfb",
+    "timestamp": "2025-11-15T18:36:58.150125",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 17,
+      "patient_name": "Patient 16",
+      "severity": 25,
+      "preferred_ward": "MATERNITY",
+      "is_emergency": false
+    },
+    "reason": "Admit Patient 16 with severity 25/100"
+  },
+  {
+    "id": "8f08a4b1-c90c-43a8-a7ff-32adc7aee2a3",
+    "transaction_id": "2c0b7750-a0f5-47ab-b73d-cf9951752bfb",
+    "timestamp": "2025-11-15T18:36:58.219476",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 17,
+      "preferred_ward": "MATERNITY",
+      "severity": 25
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "55404d03-eca6-43c2-9ae1-c4cbf6a20127",
+    "transaction_id": "2c0b7750-a0f5-47ab-b73d-cf9951752bfb",
+    "timestamp": "2025-11-15T18:36:58.271933",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 17
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "29bfd47f-1e4d-49e3-9b67-284a92897fc9",
+    "transaction_id": "2c0b7750-a0f5-47ab-b73d-cf9951752bfb",
+    "timestamp": "2025-11-15T18:36:58.360263",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 17,
+      "preferred_ward": "MATERNITY",
+      "severity": 25
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "69cece3d-12bd-41d5-9ca9-328768958bc2",
+    "transaction_id": "2c0b7750-a0f5-47ab-b73d-cf9951752bfb",
+    "timestamp": "2025-11-15T18:36:58.437496",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 17
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "fb9a3458-1b9e-4a75-a547-32adaffda29e",
+    "transaction_id": "2c0b7750-a0f5-47ab-b73d-cf9951752bfb",
+    "timestamp": "2025-11-15T18:36:58.469276",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 17,
+      "preferred_ward": "MATERNITY",
+      "severity": 25
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "7042534b-ce74-475b-8fe6-54742e241f11",
+    "transaction_id": "2c0b7750-a0f5-47ab-b73d-cf9951752bfb",
+    "timestamp": "2025-11-15T18:36:58.499251",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 17,
+      "patient_name": "Patient 16",
+      "severity": 25
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "10b0f394-bf40-4a15-8f66-045a4d119804",
+    "transaction_id": "57ab17d1-cd92-410f-94bc-c9585fd89980",
+    "timestamp": "2025-11-15T18:37:01.231611",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 18,
+      "patient_name": "Patient 17",
+      "severity": 20,
+      "preferred_ward": "ICU",
+      "is_emergency": false
+    },
+    "reason": "Admit Patient 17 with severity 20/100"
+  },
+  {
+    "id": "1f6b4d45-fea9-4741-99fb-ea351c44d1b1",
+    "transaction_id": "57ab17d1-cd92-410f-94bc-c9585fd89980",
+    "timestamp": "2025-11-15T18:37:01.245816",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 18,
+      "preferred_ward": "ICU",
+      "severity": 20
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "cf83af59-c636-41d3-b393-929fba1d1d0e",
+    "transaction_id": "57ab17d1-cd92-410f-94bc-c9585fd89980",
+    "timestamp": "2025-11-15T18:37:01.274893",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 18
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "9fe7e5e3-f1ac-468c-a3c6-8f9239f260a2",
+    "transaction_id": "57ab17d1-cd92-410f-94bc-c9585fd89980",
+    "timestamp": "2025-11-15T18:37:01.298155",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 18,
+      "preferred_ward": "ICU",
+      "severity": 20
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "8320470a-01f2-4bb7-8dff-5dd0da8489a1",
+    "transaction_id": "57ab17d1-cd92-410f-94bc-c9585fd89980",
+    "timestamp": "2025-11-15T18:37:01.321514",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 18
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "255cb986-319f-4b53-b6df-3c8af72d11cf",
+    "transaction_id": "57ab17d1-cd92-410f-94bc-c9585fd89980",
+    "timestamp": "2025-11-15T18:37:01.344887",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 18,
+      "preferred_ward": "ICU",
+      "severity": 20
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "f2f6980c-2538-4865-a0ac-7859a936e339",
+    "transaction_id": "57ab17d1-cd92-410f-94bc-c9585fd89980",
+    "timestamp": "2025-11-15T18:37:01.380297",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 18,
+      "patient_name": "Patient 17",
+      "severity": 20
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "52a8576b-257a-4a11-976e-b4b7c0ba32a9",
+    "transaction_id": "e4c7cac3-c9a5-4948-a770-727f18fbf875",
+    "timestamp": "2025-11-15T18:44:39.358194",
+    "sender": "DischargeAgent",
+    "receiver": "CleaningAgent",
+    "performative": "request",
+    "content": {
+      "action": "clean_bed",
+      "bed_id": 1,
+      "bed_number": "ICU-01",
+      "patient_id": 12
+    },
+    "reason": "Cleaning requested for bed ICU-01 after discharge"
+  },
+  {
+    "id": "1bad34e7-3f4b-4659-aa83-95c5ca4ef5b4",
+    "transaction_id": "8cb54944-7f07-4e7f-98ec-1cb3ee30a387",
+    "timestamp": "2025-11-15T18:46:07.607177",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 19,
+      "patient_name": "alisa",
+      "severity": 50,
+      "preferred_ward": "MATERNITY",
+      "is_emergency": false
+    },
+    "reason": "Admit alisa with severity 50/100"
+  },
+  {
+    "id": "d9a0ba7f-9e56-41eb-98fa-d55ca4ed5db7",
+    "transaction_id": "8cb54944-7f07-4e7f-98ec-1cb3ee30a387",
+    "timestamp": "2025-11-15T18:46:07.657360",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 19,
+      "preferred_ward": "MATERNITY",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "192cd72a-7c41-4adf-9770-a9554eaf8d01",
+    "transaction_id": "8cb54944-7f07-4e7f-98ec-1cb3ee30a387",
+    "timestamp": "2025-11-15T18:46:07.740646",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 19
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "f83f2953-ef19-44db-ab24-53dab3216981",
+    "transaction_id": "8cb54944-7f07-4e7f-98ec-1cb3ee30a387",
+    "timestamp": "2025-11-15T18:46:07.837494",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 19,
+      "preferred_ward": "MATERNITY",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "24c901c0-01d3-4f89-821e-5b102fa68fcb",
+    "transaction_id": "8cb54944-7f07-4e7f-98ec-1cb3ee30a387",
+    "timestamp": "2025-11-15T18:46:07.917164",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 19
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "e4d3b4ac-4dd1-41c0-b6c4-9ebfd0ea6212",
+    "transaction_id": "8cb54944-7f07-4e7f-98ec-1cb3ee30a387",
+    "timestamp": "2025-11-15T18:46:08.003512",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 19,
+      "preferred_ward": "MATERNITY",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "24345dd3-ac46-4e14-8133-b8a1c312e5cb",
+    "transaction_id": "8cb54944-7f07-4e7f-98ec-1cb3ee30a387",
+    "timestamp": "2025-11-15T18:46:08.075941",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 19,
+      "patient_name": "alisa",
+      "severity": 50
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "190a6c4d-03d5-4e70-838f-86c1d5037be9",
+    "transaction_id": "6a156118-51b2-46ea-aee2-4bb8d4f746c0",
+    "timestamp": "2025-11-15T18:46:26.226727",
+    "sender": "DischargeAgent",
+    "receiver": "CleaningAgent",
+    "performative": "request",
+    "content": {
+      "action": "clean_bed",
+      "bed_id": 17,
+      "bed_number": "MATERNITY-02",
+      "patient_id": 18
+    },
+    "reason": "Cleaning requested for bed MATERNITY-02 after discharge"
+  },
+  {
+    "id": "7d60d159-e400-445c-b409-60763624278a",
+    "transaction_id": "31953aad-dade-4156-bcd4-bc26f32e31d6",
+    "timestamp": "2025-11-15T18:55:50.286988",
+    "sender": "DischargeAgent",
+    "receiver": "CleaningAgent",
+    "performative": "request",
+    "content": {
+      "action": "clean_bed",
+      "bed_id": 2,
+      "bed_number": "ICU-02",
+      "patient_id": 13
+    },
+    "reason": "Cleaning requested for bed ICU-02 after discharge"
+  },
+  {
+    "id": "75c6a649-3934-4d54-9602-c353668a2fc7",
+    "transaction_id": "23d5e364-a166-453b-9511-e7bd6535eb6c",
+    "timestamp": "2025-11-15T19:17:04.514383",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 2,
+      "patient_name": "John Smith",
+      "severity": 50,
+      "preferred_ward": "ICU",
+      "is_emergency": false
+    },
+    "reason": "Admit John Smith with severity 50/100"
+  },
+  {
+    "id": "c14e084e-982c-4d38-8e87-2ffcf78e31ae",
+    "transaction_id": "23d5e364-a166-453b-9511-e7bd6535eb6c",
+    "timestamp": "2025-11-15T19:17:04.548256",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 2,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "50071dfa-b91f-47bb-815a-a78db21661bf",
+    "transaction_id": "23d5e364-a166-453b-9511-e7bd6535eb6c",
+    "timestamp": "2025-11-15T19:17:04.575411",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 2
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "1f2966d7-31f3-4074-9349-51ddbaae325a",
+    "transaction_id": "23d5e364-a166-453b-9511-e7bd6535eb6c",
+    "timestamp": "2025-11-15T19:17:04.604590",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 2,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "c3e821f4-5318-49f1-9a82-8fb8f8a85eba",
+    "transaction_id": "23d5e364-a166-453b-9511-e7bd6535eb6c",
+    "timestamp": "2025-11-15T19:17:04.637809",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 2
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "bf8afab7-5b1b-4d22-be6c-409ebb186c35",
+    "transaction_id": "23d5e364-a166-453b-9511-e7bd6535eb6c",
+    "timestamp": "2025-11-15T19:17:04.670987",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 2,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "a59ce54e-aac8-4467-8351-97c17970a8d1",
+    "transaction_id": "23d5e364-a166-453b-9511-e7bd6535eb6c",
+    "timestamp": "2025-11-15T19:17:04.698905",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 2,
+      "patient_name": "John Smith",
+      "severity": 50
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "f92393ed-7eb1-42e0-afe6-77401ff0b0c1",
+    "transaction_id": "9538d631-1981-4ac4-a3e9-95cd9b3dc827",
+    "timestamp": "2025-11-15T19:25:03.609033",
+    "sender": "AdmissionAgent",
+    "receiver": "CoordinatorAgent",
+    "performative": "request",
+    "content": {
+      "action": "assign_bed",
+      "patient_id": 6,
+      "patient_name": "John Smith",
+      "severity": 50,
+      "preferred_ward": "ICU",
+      "is_emergency": false
+    },
+    "reason": "Admit John Smith with severity 50/100"
+  },
+  {
+    "id": "3e85be7e-86b5-4ce7-90ce-2f33168f04ef",
+    "transaction_id": "9538d631-1981-4ac4-a3e9-95cd9b3dc827",
+    "timestamp": "2025-11-15T19:25:03.643788",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 6,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 1)"
+  },
+  {
+    "id": "a9784889-1a78-4a64-96f4-8b5d068b8431",
+    "transaction_id": "9538d631-1981-4ac4-a3e9-95cd9b3dc827",
+    "timestamp": "2025-11-15T19:25:03.684689",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 6
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "4b17bf44-81a6-46f5-b3ab-8b0c0405396d",
+    "transaction_id": "9538d631-1981-4ac4-a3e9-95cd9b3dc827",
+    "timestamp": "2025-11-15T19:25:03.732512",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 6,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 2)"
+  },
+  {
+    "id": "93202db8-b79e-4ab6-b255-0b07cbc4b68d",
+    "transaction_id": "9538d631-1981-4ac4-a3e9-95cd9b3dc827",
+    "timestamp": "2025-11-15T19:25:03.781688",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "request",
+    "content": {
+      "request_type": "reorder_priority",
+      "patient_id": 6
+    },
+    "reason": "Request waiting list reordering"
+  },
+  {
+    "id": "15236183-f9a2-4b1a-afe6-fc5ea010d3eb",
+    "transaction_id": "9538d631-1981-4ac4-a3e9-95cd9b3dc827",
+    "timestamp": "2025-11-15T19:25:03.847081",
+    "sender": "CoordinatorAgent",
+    "receiver": "ResourceManagerAgent",
+    "performative": "query",
+    "content": {
+      "query_type": "available_beds",
+      "patient_id": 6,
+      "preferred_ward": "ICU",
+      "severity": 50
+    },
+    "reason": "Query for bed availability (round 3)"
+  },
+  {
+    "id": "446a7717-f7f3-40c4-88aa-9c71e5ae390f",
+    "transaction_id": "9538d631-1981-4ac4-a3e9-95cd9b3dc827",
+    "timestamp": "2025-11-15T19:25:03.907614",
+    "sender": "CoordinatorAgent",
+    "receiver": "WaitingListAgent",
+    "performative": "inform",
+    "content": {
+      "action": "add_to_list",
+      "patient_id": 6,
+      "patient_name": "John Smith",
+      "severity": 50
+    },
+    "reason": "No beds available; patient added to waiting list"
+  },
+  {
+    "id": "94cf5ded-d62e-4003-bcd3-28faef8825e8",
+    "transaction_id": "b5f9ea17-b2bc-45cb-bfa9-155b85f8cf13",
+    "timestamp": "2025-11-15T19:25:11.809776",
+    "sender": "DischargeAgent",
+    "receiver": "CleaningAgent",
+    "performative": "request",
+    "content": {
+      "action": "clean_bed",
+      "bed_id": 1,
+      "bed_number": "ICU-01",
+      "patient_id": 5
+    },
+    "reason": "Cleaning requested for bed ICU-01 after discharge"
+  }
+]

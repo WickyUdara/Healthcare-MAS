@@ -1,0 +1,37 @@
+.bed-card {
+  background: white;
+  border-left: 4px solid #ccc;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.bed-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.bed-card-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.bed-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #f0f0f0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.bed-card-body {
+  font-size: 13px;
+}
+
+.bed-card-body p {
+  margin: 4px 0;
+}

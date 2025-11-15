@@ -1,0 +1,147 @@
+.cleaning-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.cleaning-page h1 {
+  color: #1976D2;
+  margin-bottom: 24px;
+}
+
+.cleaning-info {
+  background: #E3F2FD;
+  border-left: 4px solid #1976D2;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 32px;
+}
+
+.cleaning-info p {
+  margin: 8px 0;
+  color: #1565C0;
+}
+
+.beds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.bed-status-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #e0e0e0;
+}
+
+.bed-status-card.available {
+  border-color: #4CAF50;
+  background: #F1F8E9;
+}
+
+.bed-status-card.occupied {
+  border-color: #FF9800;
+  background: #FFF3E0;
+}
+
+.bed-status-card.cleaning {
+  border-color: #2196F3;
+  background: #E3F2FD;
+}
+
+.bed-number {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.bed-ward {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.cleaning-animation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #2196F3;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cleaning-time {
+  font-size: 12px;
+  color: #2196F3;
+  font-weight: bold;
+}
+
+.status-indicator {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+.status-indicator.available {
+  background: #4CAF50;
+  color: white;
+}
+
+.status-indicator.occupied {
+  background: #FF9800;
+  color: white;
+}
+
+.status-indicator.cleaning {
+  background: #2196F3;
+  color: white;
+}
+
+.status-indicator.maintenance {
+  background: #9C27B0;
+  color: white;
+}
+
+.current-patient {
+  font-size: 11px;
+  color: #666;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #ddd;
+  word-wrap: break-word;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+  font-size: 18px;
+}

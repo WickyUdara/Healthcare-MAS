@@ -1,0 +1,165 @@
+.activity-log-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.activity-log-page h1 {
+  color: #1976D2;
+  margin-bottom: 24px;
+}
+
+.controls {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.controls label {
+  font-weight: 600;
+}
+
+.controls select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.transactions-panel {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.transactions-panel h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 16px;
+  color: #333;
+}
+
+.transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.transaction-item {
+  padding: 12px;
+  background: #f9f9f9;
+  border-left: 4px solid #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.transaction-item:hover {
+  background: #f0f0f0;
+  border-left-color: #2196F3;
+}
+
+.transaction-item.active {
+  background: #E3F2FD;
+  border-left-color: #1976D2;
+}
+
+.tx-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.tx-id {
+  font-family: monospace;
+  font-size: 12px;
+  color: #999;
+}
+
+.tx-count {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #1976D2;
+  color: white;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.tx-preview {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.details-panel {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.details-panel h2 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 12px;
+}
+
+.messages-section {
+  margin-top: 24px;
+}
+
+.messages-section h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.message-wrapper {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.message-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: #1976D2;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: #999;
+  font-size: 16px;
+}
